@@ -5,12 +5,12 @@ from playsound import playsound
 driver = webdriver.Chrome('./chromedriver')  # Optional argument, if not specified will search path.
 driver.get('https://www.tradingview.com/symbols/BTCUSDT/')
 result = driver.find_elements_by_class_name('tabValue-3iOTI9jm')
-target = 12000
+target = 12080
 status = 0
 
 
 def play_sound(duration):
-    for i in range(int(duration)):
+    for i in range(duration):
         playsound('./sound.mp3')
         time.sleep(1)
 
