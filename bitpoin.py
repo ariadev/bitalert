@@ -1,4 +1,5 @@
 import time
+import sys
 from selenium import webdriver
 from playsound import playsound
 
@@ -10,10 +11,10 @@ STATUS = 0
 PREVIUS_PRICE = 0
 
 # Windows webdriver
-# driver = webdriver.Chrome('./chromedriver')
+driver = webdriver.Chrome('./chromedriver')
 
 # Linux webdriver
-driver = webdriver.Chrome('./chromedriver-linux')
+# driver = webdriver.Chrome('./chromedriver-linux')
 
 driver.get('https://www.tradingview.com/symbols/'+SYMBOL+'/')
 result = driver.find_elements_by_class_name('tabValue-3iOTI9jm')
@@ -25,14 +26,21 @@ def play_sound(duration):
         time.sleep(1)
 
 
+def remove_last_line():
+    sys.stdout.write("\033[F") # Cursor up one line
+    sys.stdout.write("\033[K") # Cursor up one line
+
+
 def check_stats_of_price(price):
     global PREVIUS_PRICE
 
     if price > PREVIUS_PRICE and PREVIUS_PRICE != 0:
         print('PRICE GOES UP')
+        remove_last_line()
 
     if price < PREVIUS_PRICE and PREVIUS_PRICE != 0:
         print('PRICE GOES DOWN')
+        remove_last_line()
 
 
 def money_tracking():
