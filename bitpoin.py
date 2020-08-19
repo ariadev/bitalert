@@ -5,17 +5,23 @@ from playsound import playsound
 from colorama import Fore
 
 SYMBOL = 'BTCUSDT'
-print('enter your target:')
-TARGET = float(input())
-print('you entered ' + str(TARGET) + ' as your target')
-STATUS = 0
+print('enter your UP_TARGET:')
+UP_TARGET = float(input())
+print('you entered ' + str(UP_TARGET) + ' as your UP_TARGET')
+UP_STATUS = 0
+
+print('enter your DOWN_TARGET:')
+DOWN_TARGET = float(input())
+print('you entered ' + str(DOWN_TARGET) + ' as your DOWN_TARGET')
+DOWN_STATUS = 0
+
 PREVIUS_PRICE = 0
 
 # Windows webdriver
-driver = webdriver.Chrome('./chromedriver')
+# driver = webdriver.Chrome('./chromedriver')
 
 # Linux webdriver
-# driver = webdriver.Chrome('./chromedriver-linux')
+driver = webdriver.Chrome('./chromedriver-linux')
 
 driver.get('https://www.tradingview.com/symbols/'+SYMBOL+'/')
 result = driver.find_elements_by_class_name('tabValue-3iOTI9jm')
@@ -45,7 +51,8 @@ def check_stats_of_price(price):
 
 
 def money_tracking():
-    global STATUS
+    global UP_STATUS
+    global DOWN_STATUS
     global PREVIUS_PRICE
 
     while True:
@@ -54,10 +61,15 @@ def money_tracking():
 
         check_stats_of_price(float(result[1].text))
 
-        if STATUS == 0:
-            if float(result[1].text) >= TARGET:
+        if UP_STATUS == 0:
+            if float(result[1].text) >= UP_TARGET:
                 play_sound(5)
-                STATUS = 1
+                UP_STATUS = 1
+
+        if DOWN_STATUS == 0:
+            if float(result[1].text) <= DOWN_TARGET:
+                play_sound(5)
+                DOWN_STATUS = 1
 
 
 if __name__ == "__main__":
