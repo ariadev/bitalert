@@ -2,11 +2,19 @@ import time
 from selenium import webdriver
 from playsound import playsound
 
-driver = webdriver.Chrome('./chromedriver')  # Optional argument, if not specified will search path.
-driver.get('https://www.tradingview.com/symbols/BTCUSDT/')
+# Windows webdriver
+# driver = webdriver.Chrome('./chromedriver')
+
+# Linux webdriver
+driver = webdriver.Chrome('./chromedriver-linux')
+
+SYMBOL = 'BTCUSDT'
+TARGET = 11796
+STATUS = 0
+
+driver.get('https://www.tradingview.com/symbols/'+SYMBOL+'/')
+
 result = driver.find_elements_by_class_name('tabValue-3iOTI9jm')
-target = 12080
-status = 0
 
 
 def play_sound(duration):
@@ -16,9 +24,9 @@ def play_sound(duration):
 
 
 while True:
-    if status == 0:
-        if float(result[1].text) >= target:
+    if STATUS == 0:
+        if float(result[1].text) >= TARGET:
             play_sound(5)
-            status = 1
+            STATUS = 1
 
     time.sleep(1)
