@@ -23,10 +23,17 @@ def play_sound(duration):
         time.sleep(1)
 
 
-while True:
-    if STATUS == 0:
-        if float(result[1].text) >= TARGET:
-            play_sound(5)
-            STATUS = 1
+def money_tracking():
+    while True:
+        if STATUS == 0:
+            if float(result[1].text) >= TARGET:
+                play_sound(5)
+                STATUS = 1
 
-    time.sleep(1)
+        time.sleep(1)
+
+
+if __name__ == "__main__":
+    print('enter your target:')
+    target = float(input())
+    print(target)
