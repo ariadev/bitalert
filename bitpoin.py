@@ -34,12 +34,12 @@ def remove_last_line():
 def check_stats_of_price(price):
     global PREVIUS_PRICE
 
-    if price > PREVIUS_PRICE and PREVIUS_PRICE != 0:
-        print('PRICE GOES UP')
+    if PREVIUS_PRICE != 0 and price > PREVIUS_PRICE:
+        print('PRICE GOES UP | ' + str(price))
         remove_last_line()
 
-    if price < PREVIUS_PRICE and PREVIUS_PRICE != 0:
-        print('PRICE GOES DOWN')
+    if PREVIUS_PRICE != 0 and price < PREVIUS_PRICE:
+        print('PRICE GOES DOWN | '+str(price))
         remove_last_line()
 
 
