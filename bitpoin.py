@@ -2,6 +2,7 @@ import time
 import sys
 from selenium import webdriver
 from playsound import playsound
+from colorama import Fore
 
 SYMBOL = 'BTCUSDT'
 print('enter your target:')
@@ -27,19 +28,19 @@ def play_sound(duration):
 
 
 def remove_last_line():
-    sys.stdout.write("\033[F") # Cursor up one line
-    sys.stdout.write("\033[K") # Cursor up one line
+    sys.stdout.write("\033[F")  # Cursor up one line
+    sys.stdout.write("\033[K")  # Cursor up one line
 
 
 def check_stats_of_price(price):
     global PREVIUS_PRICE
 
     if PREVIUS_PRICE != 0 and price > PREVIUS_PRICE:
-        print('PRICE GOES UP | ' + str(price))
+        print(Fore.GREEN + 'PRICE GOES UP | ' + str(price))
         remove_last_line()
 
     if PREVIUS_PRICE != 0 and price < PREVIUS_PRICE:
-        print('PRICE GOES DOWN | '+str(price))
+        print(Fore.RED + 'PRICE GOES DOWN | ' + str(price))
         remove_last_line()
 
 
